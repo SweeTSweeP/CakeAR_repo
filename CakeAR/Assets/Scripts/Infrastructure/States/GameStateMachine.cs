@@ -18,6 +18,7 @@ namespace Infrastructure.States
                 [typeof(BootstrapState)] = new BootstrapState(this, services, curtain),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, curtain, services, sceneLoader),
                 [typeof(GameLoopState)] = new GameLoopState(this, services, curtain),
+                [typeof(NoInternetState)] = new NoInternetState(this, services, curtain),
             };
         }
 

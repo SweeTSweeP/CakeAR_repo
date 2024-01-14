@@ -1,4 +1,6 @@
 ﻿using Infrastructure.Services;
+using Infrastructure.Services.GameObjectDisposer;
+using Infrastructure.Services.InternetCheck;
 using Infrastructure.Services.Loaders.AssetLoader;
 using UI;
 
@@ -23,8 +25,9 @@ namespace Infrastructure.States
         public void Enter()
         {
             RegisterServices();
-            _curtain.ShowCurtain(true);
+            _curtain.ShowCurtain();
             _curtain.SetActiveLoadingText(true);
+            _curtain.SetActiveErrorMessage(false);
             _gameStateMachine.Enter<LoadLevelState>();
         }
 
@@ -35,6 +38,8 @@ namespace Infrastructure.States
         private void RegisterServices()
         {
             _services.RegisterSingle<IAssetLoader>(new AssetLoader());
+            _services.RegisterSingle<IInternetChecker>(new InternetChecker());
+            _services.RegisterSingle<IGameObjectDisposer>(new GameObjectDisposer());
         }
     }
 }

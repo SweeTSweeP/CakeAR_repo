@@ -26,7 +26,9 @@ namespace Infrastructure.States
 
         public void Exit()
         {
-            _curtain.ShowCurtain(true);
+            _curtain.ShowCurtain();
+            _curtain.SetActiveLoadingText(true);
+            _curtain.SetActiveErrorMessage(false);
         }
     }
 }
