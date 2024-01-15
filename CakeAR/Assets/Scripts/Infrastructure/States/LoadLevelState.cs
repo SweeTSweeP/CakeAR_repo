@@ -43,9 +43,9 @@ namespace Infrastructure.States
         private async void EnterLoadLevel()
         {
             var assetLoader = _services.Single<IAssetLoader>();
-            var gameObjectDisposer = _services.Single<IGameObjectDisposer>();
+            var gameObjectDisposer = _services.Single<IGameObjectRepository>();
 
-            var cakeTask = assetLoader.LoadModel(Constants.FakeUrl, "Cake", gameObjectDisposer);
+            var cakeTask = assetLoader.LoadModel(Constants.CakeModelUrl, "Cake", gameObjectDisposer);
 
             await UniTask.WaitWhile(() => !cakeTask.GetAwaiter().IsCompleted);
 

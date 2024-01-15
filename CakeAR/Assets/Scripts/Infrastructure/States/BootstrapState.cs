@@ -39,7 +39,7 @@ namespace Infrastructure.States
         {
             _services.RegisterSingle<IAssetLoader>(new AssetLoader());
             _services.RegisterSingle<IInternetChecker>(new InternetChecker());
-            _services.RegisterSingle<IGameObjectDisposer>(new GameObjectDisposer());
+            _services.RegisterSingle<IGameObjectRepository>(new GameObjectRepository());
         }
     }
 }

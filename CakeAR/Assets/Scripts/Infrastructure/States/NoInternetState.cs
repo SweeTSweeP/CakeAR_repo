@@ -39,7 +39,7 @@ namespace Infrastructure.States
 
         private void EnterBackToLoadLevelState()
         {
-            var gameObjectDisposer = _services.Single<IGameObjectDisposer>();
+            var gameObjectDisposer = _services.Single<IGameObjectRepository>();
             gameObjectDisposer.Dispose();
             
             _gameStateMachine.Enter<LoadLevelState>();

@@ -9,10 +9,10 @@ namespace Infrastructure.Services.Loaders.AssetLoader
 {
     public class AssetLoader : IAssetLoader
     {
-        public async UniTask<bool> LoadModel(string url, string newModelName, IGameObjectDisposer gameObjectDisposer)
+        public async UniTask<bool> LoadModel(string url, string newModelName, IGameObjectRepository gameObjectRepository)
         {
             var cts = new CancellationTokenSource();
-            cts.CancelAfterSlim(TimeSpan.FromSeconds(5));
+            cts.CancelAfterSlim(TimeSpan.FromSeconds(12));
             
             var gltf = new GltfImport();
             var success = await gltf.Load(url, cancellationToken: cts.Token);
@@ -20,7 +20,8 @@ namespace Infrastructure.Services.Loaders.AssetLoader
             if (success) 
             {
                 var gameObject = new GameObject(newModelName);
-                gameObjectDisposer.AddObjectToDispose(gameObject);
+                gameObjectRepository.AddObjectToDispose(gameObject);
+                gameObject.SetActive(false);
                 
                 await gltf.InstantiateMainSceneAsync(gameObject.transform, cts.Token);
             }
